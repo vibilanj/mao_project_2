@@ -1,11 +1,14 @@
-from process_image import read_image
+from process_image import read_image, compress_image, write_image
+from k_means import initialize_means, k_means
 
 
-img = read_image("img/macaw.jpg")
+# Read the rocks image
+img = read_image("img/rocks.jpg")
 
+clusters = 32
 
+points, centroids = initialize_means(img, clusters)
+centroids, index = k_means(points, centroids, clusters)
+compressed = compress_image(centroids, index, img)
 
-# import cv2
-# cv2.imshow("image", img)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
+write_image("compressed.jpg", compressed)
