@@ -3,7 +3,7 @@ from k_means import initialize_means, k_means
 
 
 # Read the rocks image
-img = read_image("img/rocks.jpg")
+img = read_image("images/rocks.jpg")
 
 clusters = 32
 
