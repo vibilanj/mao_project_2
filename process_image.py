@@ -9,13 +9,13 @@ def read_image(image_path):
     return img
 
 
-# Rescales and writes the image to the given path.
+# Rescales and saves the image to the given path.
 def write_image(image_path, image):
     cv2.imwrite(image_path, 255 * image)
 
 
 # Compresses the image based on the centroid colors and the
-# index which tells which cluster a pixel is assigned to.
+# array of which cluster a pixel is assigned to.
 def compress_image(centroids, index, img):
     # Assign each pixel to the corresponding centroid color.
     centroid = np.array(centroids)

@@ -8,7 +8,7 @@ def initialize_centroids(img, clusters):
     points = img.reshape((-1, img.shape[2]))
     m, n = points.shape
 
-    # The array of assumed centroids (means) for k-means
+    # The array of assumed centroids (means) for k-means.
     centroids = np.zeros((clusters, n))
 
     # Initialize the centroids by randomly choosing 10 pixels and
@@ -17,7 +17,7 @@ def initialize_centroids(img, clusters):
         rand_indices = np.random.choice(m, size = 10, replace = False)
         centroids[i] = np.mean(points[rand_indices], axis = 0)
 
-    # Return the flattened image and the initialized centroids
+    # Return the flattened image and the initialized centroids.
     return points, centroids
 
 
