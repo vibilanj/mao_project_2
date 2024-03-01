@@ -10,7 +10,15 @@ The implementation of the algorithm would allow users to interact with a command
 
 ## Introduction
 
+This project is an image compression algorithm that uses K-means clustering to compress images. The user can run the program and select the image they wish to compress. The program will then group the pixels with similar colors and replace them with the color of the centroid. By reducing the number of unique colors in the image, compression can be achieved without compromising the overall visual fidelity of the image.
+
 ## Implementation Details
+
+The project is implemented in Python. As stated in the proposal, the user can provide the path to the image and the desired compression level when running the program. The program will then process the image and save the compressed image to a separate file.
+
+Here are the descriptions of the two Python files. Furthermore, the code in each file is documented with comments to explain each part in greater detail.
+
+### `.py`
 
 ## Further Improvements
 
