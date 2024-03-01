@@ -1,58 +1,59 @@
 import numpy as np
 
 
-def initialize_means(img, clusters):
-    # Flatten image into a 2D matrix
+# Initialize the centroids for the image.
+def initialize_centroids(img, clusters):
+    # Flatten the image from a 3D matrix to a 2D matrix of
+    # rgb(3) values.
     points = img.reshape((-1, img.shape[2]))
     m, n = points.shape
 
-    # Clusters are the number of color (cluster) that we choose.
-
-    # Centroids is the array of assumed centroids (means)
+    # The array of assumed centroids (means) for k-means
     centroids = np.zeros((clusters, n))
 
-    # Randomly initialize the centroids
+    # Initialize the centroids by randomly choosing 10 pixels and
+    # calculating the mean color of the 10 pixels.
     for i in range(clusters):
         rand_indices = np.random.choice(m, size = 10, replace = False)
         centroids[i] = np.mean(points[rand_indices], axis = 0)
 
+    # Return the flattened image and the initialized centroids
     return points, centroids
 
 
-def distance(x1, y1, x2, y2):
-    return np.sqrt((np.square(x2 - x1)) + np.square(y2 - y1))
-
-
+# Performs the k-means algorithm on the image.
 def k_means(points, centroids, clusters):
+    # Number of iterations for the k-means algorithm.
     iterations = 10
-    m, n = points.shape
 
-    # These are the index values corresponding to the cluster to which pixel
-    # belongs.
+    # Stores the index of the cluster to which each pixel is assigned.
+    m, _ = points.shape
     index = np.zeros(m)
 
-    # K-means algorithm
+    # Perform the k-means iterations.
     while iterations > 0:
+        # Assign the points to the clusters.
         for j in range(m):
-            # Initialize minimum value to a large value
-            min_dist = float("inf")
-            temp = None
+            # Calculate the Euclidean distances from the j-th pixel to each
+            # centroid.
+            dists = np.sqrt(((points[j] - centroids) ** 2).sum(axis = 1))
 
-            for k in range(clusters):
-                x1, y1 = points[j, 0], points[j, 1]
-                x2, y2 = centroids[k, 0], centroids[k, 1]
+            # Assign the j-th pixel to the cluster whose centroid it is
+            # closest to.
+            index[j] = dists.argmin()
 
-                dist = distance(x1, y1, x2, y2) 
-                if dist <= min_dist:
-                    min_dist = dist
-                    temp = k
-                    index[j] = k
-
+        # Update the centroids for each cluster.
         for k in range(clusters):
-            cluster_points = points[index == k] 
+            # Get the points that are assigned to the k-th cluster.
+            cluster_points = points[index == k]
+
+            # If the k-th cluster is not empty, update its centroid to be
+            # the mean of the points assigned to it.
             if len(cluster_points) > 0:
                 centroids[k] = np.mean(cluster_points, axis = 0)
 
         iterations -= 1
 
+    # Return the final centroids and the mapping of each pixel to its
+    # centoid.
     return centroids, index

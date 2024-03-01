@@ -20,6 +20,12 @@ Here are the descriptions of the two Python files. Furthermore, the code in each
 
 ### `.py`
 
+#### Notes (DELETE LATER)
+
+- Using jpeg did not provide nice results as the original jpeg was already very compressed. However, using provided better results with decreasing size with less clusters
+- Using numpy broadcasting in the k-means code made the program much faster. Originally, with the rocks.png and 32 clusters, it took 336s (5m36s) while after the change it took 27 seconds. 12x faster / 91% less time.
+- Taking a random color when init centroids allows us to get a more representative starting point especially when the data is noisy. This can help the k-means algorithm converge faster and increase the quality of the compressed image.
+
 ## Further Improvements
 
 ## How to Run
