@@ -55,5 +55,5 @@ def k_means(points, centroids, clusters):
         iterations -= 1
 
     # Return the final centroids and the mapping of each pixel to its
-    # centoid.
+    # centroid.
     return centroids, index

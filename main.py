@@ -4,9 +4,20 @@ from k_means import initialize_centroids, k_means
 
 # Make the parser to handle command line arguments for user input.
 parser = argparse.ArgumentParser("main")
-parser.add_argument("image_path", type = str, help = "the path of the image to be compressed")
-parser.add_argument("number_of_clusters", type = int, help = "number of clusters (colors)")
-parser.add_argument("save_path", type = str, help = "the path to save the compressed image")
+parser.add_argument(
+    "image_path",
+    type = str,
+    help = "the path of the image to be compressed")
+parser.add_argument(
+    "--number_of_clusters",
+    type = int,
+    default = 16,
+    help = "number of clusters (colors)")
+parser.add_argument(
+    "--save_path",
+    type = str,
+    default = "compressed.jpg",
+    help = "the path to save the compressed image")
 args = parser.parse_args()
 
 # Get the user input from the argument parser.
